@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 编辑使用 XMLSpy v2006 U (http://www.altova.com) 由 any (any) -->
+<Tasks xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="C:\mydoc\myprojects\cldshopping\shopping\src\main\resources\Task_2_0.xsd" storeId="28lu" rootVolume="999999" productType="default">
+	<skipUrl>baidu.com</skipUrl>
+	<skipUrl>comicdata.17share.org</skipUrl>
+	<skipUrl>googleads.g.doubleclick.net</skipUrl>
+	<PrdTask>
+		<baseBrowseTask taskName="lvl1" enableJS="false" isStart="true">
+			<startUrl value="http://www.28lu.com/Specialcategory_1002/Index.aspx"/>
+			<userAttribute name="lvl2urls">
+				<value value="//div[@id='leftc']/div[2]/li/a" toType="list" toEntryType="string"/>
+			</userAttribute>
+			<csvtransform transformClass="org.cld.etl.csv.CrawlItemNoListAsCSV"/>
+			<nextTask>
+				<invokeTask toCallTaskName="lvl2">
+					<param paramName="lvl2urls"/>
+				</invokeTask>
+			</nextTask>
+		</baseBrowseTask>
+	</PrdTask>
+	<PrdTask tryPattern="false">
+		<baseBrowseTask taskName="lvl2" enableJS="true" isStart="true">
+			<param name="lvl2urls" type="list"/>
+			<startUrl value="lvl2urls" fromType="expression"/>
+			<userAttribute name="bookurls">
+				<value value="//div[@id='leftc']/div[2]/ul/li/div[1]/a" toType="externalList" toEntryType="string"/>
+			</userAttribute>
+			<userAttribute name="seriesName">
+				<value value="//div[@id='leftc']/div[1]/ul/text()[2]" toType="string">
+					<strPreprocess trimPre=">>"/>
+				</value>
+			</userAttribute>
+			<csvtransform transformClass="org.cld.etl.csv.CrawlItemNoListAsCSV"/>
+			<nextTask>
+				<invokeTask toCallTaskName="prd">
+					<param paramName="bookurls"/>
+				</invokeTask>
+			</nextTask>
+		</baseBrowseTask>
+	</PrdTask>
+	<PrdTask processType="genbpt" tryPattern="false">
+		<baseBrowseTask taskName="prd" isStart="true" enableJS="false">
+			<param name="bookurls" type="list"/>
+			<startUrl value="bookurls" fromType="expression"/>
+			<userAttribute name="bookpageurls">
+				<value value="//div[@class='contentpic']/img | //div[@class='contentpic']/p/img" fromType="xpath" toType="externalList"/>
+			</userAttribute>
+			<userAttribute name="bookName">
+				<value value="//div[@class='ctop']/h2" fromType="xpath" toType="string"/>
+			</userAttribute>
+			<csvtransform transformClass="org.cld.etl.csv.CrawlItemNoListAsCSV"/>
+		</baseBrowseTask>
+		<totalPage value="//span[@id='pe100_page_contentpage']/text()[1]" toType="int">
+			<strPreprocess trimPre="共" trimPost="页"/>
+		</totalPage>
+		<nextPage value="//span[@id='pe100_page_contentpage']/a[count(//span[@id='pe100_page_contentpage']/a)-1]"/>
+	</PrdTask>
+</Tasks>

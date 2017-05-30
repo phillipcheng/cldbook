@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.cld.crbook.util.BookHandler;
+import org.cld.crbook.util.BookUtil;
 import org.cld.datacrawl.test.TestBase;
 import org.cld.taskmgr.entity.RunType;
 import org.cld.util.CsvUtil;
@@ -30,9 +31,11 @@ public class TestBooks extends TestBase {
 		super();
 	}
 
+	
 	public static final String XRS52_CONF="52xrs.xml";
 	public static final String A8Z8_CONF="a8z8.xml";
 	public static final String DMZJ_CONF="dmzj.xml";
+	public static final String LU28_CONF="28lu.xml";
 	public static final String CL_CONF="childrenslibrary.xml";
 	public static final String FKB_CONF="freekidsbooks.xml";
 	public static final String BAOLINY_CONF="baoliny.xml";
@@ -73,6 +76,10 @@ public class TestBooks extends TestBase {
 	public void testOneRoot3() throws Exception{
 		testOneRoot(DMZJ_CONF);
 	}
+	@Test
+	public void test28LuRoot() throws Exception{
+		testOneRoot(LU28_CONF);
+	}
 	
 	//
 	public void testOneCategory(String catConf, String url) throws Exception{
@@ -81,6 +88,7 @@ public class TestBooks extends TestBase {
 		List<String> csvs = CsvUtil.outputCsv(cil, null);
 		logger.info(csvs);
 	}
+	
 	@Test
 	public void testOneCategory1() throws Exception{
 		testOneCategory(XRS52_CONF, "http://www.52xrs.com/list/lsgs.htm");
@@ -89,6 +97,11 @@ public class TestBooks extends TestBase {
 	@Test
 	public void testOneCategory2() throws Exception{
 		testOneCategory(DMZJ_CONF, "http://manhua.dmzj.com/gsmmx21/");
+	}
+	
+	@Test
+	public void testOneCategory28Lu() throws Exception{
+		testOneCategory(LU28_CONF, "http://www.28lu.com/lianhuanhuaSpecial/hongyan/Index.html");
 	}
 	
 	//
@@ -100,18 +113,22 @@ public class TestBooks extends TestBase {
 	}
 	
 	@Test
-	public void testPrd1() throws Exception {
+	public void testPrdXrs52() throws Exception {
 		testPrd(XRS52_CONF, "http://www.52xrs.com/comic/2413/");
 	}
 	@Test
-	public void testPrd2() throws Exception {
+	public void testPrdDMZJ() throws Exception {
 		testPrd(DMZJ_CONF, "http://manhua.dmzj.com/gsmmx21/18175.shtml");
 	}
-	
-	
+	@Test
+	public void testPrd28Lu() throws Exception {
+		testPrd(LU28_CONF, "http://www.28lu.com/xd/170757886_29.html");
+	}
+
 	public void xrsDownload(String bookSeries, int startBookIdx, int bookNumber) throws Exception{
 		xrsDownload(bookSeries, startBookIdx, 0, bookNumber, false);
 	}
+	
 	public void xrsDownload(String bookSeries, int startBookIdx, int startBookNumber, int endBookNumber, boolean onlyCover) throws Exception{
 		ExecutorService exeService = Executors.newFixedThreadPool(20);
 		String rootDir = "http://www.52xrs.com/comic/";
@@ -151,6 +168,14 @@ public class TestBooks extends TestBase {
 		
 		exeService.shutdown();
 		exeService.awaitTermination(4, TimeUnit.HOURS);
+	}
+	@Test
+	public void dlHY() throws Exception{
+		BookUtil.downloadSeries("client1-v2.properties", LU28_CONF, "lvl2", "http://www.28lu.com/lianhuanhuaSpecial/hongyan/Index.html", "c://mydoc//picbook");
+	}
+	@Test
+	public void dlSGYY() throws Exception{
+		BookUtil.downloadSeries("client1-v2.properties", LU28_CONF, "lvl2", "http://www.28lu.com/lianhuanhuaSpecial/sgyy/Index.html", "c://mydoc//picbook");
 	}
 	
 	@Test
