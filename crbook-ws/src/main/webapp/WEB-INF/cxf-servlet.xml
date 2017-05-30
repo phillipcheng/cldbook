@@ -15,7 +15,7 @@ http://cxf.apache.org/schemas/jaxws.xsd">
   <import resource="classpath:META-INF/cxf/cxf.xml" />
   <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
     
-    <bean id="dsPool" class="org.cld.util.jdbc.DataSourcePool" factory-method="getDataSource">
+    <bean id="dsPool" class="org.cldutil.util.jdbc.DataSourcePool" factory-method="getDataSource">
     </bean>
     
     <bean id="jdbcService" class="cy.crbook.persist.JDBCPersistService">

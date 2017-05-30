@@ -9,7 +9,7 @@
 			<userAttribute name="lvl2urls">
 				<value value="//div[@class='main_nav']/ul/li[not(@class='first')]/a" toType="list" toEntryType="string"/>
 			</userAttribute>
-			<csvtransform transformClass="org.cld.etl.csv.CrawlItemNoListAsCSV"/>
+			<csvtransform transformClass="org.cldutil.etl.csv.CrawlItemNoListAsCSV"/>
 			<nextTask>
 				<invokeTask toCallTaskName="lvl2">
 					<param paramName="lvl2urls"/>
@@ -24,7 +24,7 @@
 			<userAttribute name="bookurls">
 				<value value="//div[@class='scmtList']/ul/li/a" toType="externalList" toEntryType="string"/>
 			</userAttribute>
-			<csvtransform transformClass="org.cld.etl.csv.CrawlItemNoListAsCSV"/>
+			<csvtransform transformClass="org.cldutil.etl.csv.CrawlItemNoListAsCSV"/>
 			<nextTask>
 				<invokeTask toCallTaskName="prd">
 					<param paramName="bookurls"/>
@@ -47,7 +47,7 @@
 			<userAttribute name="bookpageurls">
 				<value value="//img[@id='Img']" fromType="xpath" toType="externalList"/>
 			</userAttribute>
-			<csvtransform transformClass="org.cld.etl.csv.CrawlItemNoListAsCSV"/>
+			<csvtransform transformClass="org.cldutil.etl.csv.CrawlItemNoListAsCSV"/>
 		</baseBrowseTask>
 		<firstPageClickStream>
 			<link>

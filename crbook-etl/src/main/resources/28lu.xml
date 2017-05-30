@@ -10,7 +10,7 @@
 			<userAttribute name="lvl2urls">
 				<value value="//div[@id='leftc']/div[2]/li/a" toType="list" toEntryType="string"/>
 			</userAttribute>
-			<csvtransform transformClass="org.cld.etl.csv.CrawlItemNoListAsCSV"/>
+			<csvtransform transformClass="org.cldutil.etl.csv.CrawlItemNoListAsCSV"/>
 			<nextTask>
 				<invokeTask toCallTaskName="lvl2">
 					<param paramName="lvl2urls"/>
@@ -30,7 +30,7 @@
 					<strPreprocess trimPre=">>"/>
 				</value>
 			</userAttribute>
-			<csvtransform transformClass="org.cld.etl.csv.CrawlItemNoListAsCSV"/>
+			<csvtransform transformClass="org.cldutil.etl.csv.CrawlItemNoListAsCSV"/>
 			<nextTask>
 				<invokeTask toCallTaskName="prd">
 					<param paramName="bookurls"/>
@@ -48,7 +48,7 @@
 			<userAttribute name="bookName">
 				<value value="//div[@class='ctop']/h2" fromType="xpath" toType="string"/>
 			</userAttribute>
-			<csvtransform transformClass="org.cld.etl.csv.CrawlItemNoListAsCSV"/>
+			<csvtransform transformClass="org.cldutil.etl.csv.CrawlItemNoListAsCSV"/>
 		</baseBrowseTask>
 		<totalPage value="//span[@id='pe100_page_contentpage']/text()[1]" toType="int">
 			<strPreprocess trimPre="共" trimPost="页"/>

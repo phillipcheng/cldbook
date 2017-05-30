@@ -10,10 +10,10 @@
 <%@ page import="org.apache.logging.log4j.Logger"%>
 <%@ page import="org.json.JSONObject"%>
 <%@ page import="java.net.URLDecoder" %>
-<%@ page import="cy.crbook.wsserver.CRBookWebUtil"%>
-<%@ page import="cy.common.entity.Reading"%>
-<%@ page import="cy.common.entity.Book"%>
-<%@ page import="org.cld.util.PatternResult"%>
+<%@ page import="org.cldutil.crbook.wsserver.CRBookWebUtil"%>
+<%@ page import="org.cldutil.crbook.common.entity.Reading"%>
+<%@ page import="org.cldutil.crbook.common.entity.Book"%>
+<%@ page import="org.cldutil.util.PatternResult"%>
 
 
 <%
