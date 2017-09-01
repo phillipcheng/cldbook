@@ -11,7 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.cldutil.crbook.util.BookHandler;
 import org.cldutil.crbook.util.BookUtil;
-import org.cldutil.datacrawl.test.TestBase;
+import org.cldutil.datacrawl.client.ClientBase;
 import org.cldutil.taskmgr.entity.RunType;
 import org.cldutil.util.CsvUtil;
 import org.cldutil.util.DownloadUtil;
@@ -23,7 +23,7 @@ import org.cldutil.util.entity.Product;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestBooks extends TestBase {
+public class TestBooks extends ClientBase {
 	private static Logger logger =  LogManager.getLogger(TestBooks.class);
 	private String propFile = "client1-v2.properties";
 	

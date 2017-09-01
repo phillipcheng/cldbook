@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.cldutil.datacrawl.CrawlConf;
-import org.cldutil.datacrawl.test.CrawlTestUtil;
+import org.cldutil.datacrawl.client.CrawlClientUtil;
 import org.cldutil.taskmgr.entity.RunType;
 import org.cldutil.util.DownloadUtil;
 import org.cldutil.util.PatternIO;
@@ -29,7 +29,7 @@ public class BookUtil {
 		CrawlConf cconf = new CrawlConf(crawlPropFile);
 		ExecutorService exeService = Executors.newFixedThreadPool(20);
 		String taskId = "BookUtilTaskId";
-		List<CrawledItem> cil = CrawlTestUtil.browsePrd(null, bookSiteConf, seriesUrl, prdTaskName, cconf, taskId, null, false, RunType.all);
+		List<CrawledItem> cil = CrawlClientUtil.browsePrd(null, bookSiteConf, seriesUrl, prdTaskName, cconf, taskId, null, false, RunType.all);
 		String seriesName= null;
 		for (CrawledItem ci: cil){
 			if (ci instanceof Product){
